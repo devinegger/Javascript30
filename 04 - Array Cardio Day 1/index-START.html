@@ -128,15 +128,45 @@
 
       // 5. Sort the inventors by years lived
 
-      console.log(
-        inventors.sort((a, b) => a.passed - a.year - (b.passed = b.year))
-      );
+      const sortedOldest = inventors.sort(function(a,b) {
+        const lastGuy = a.passed - a.year;
+        const nextGuy = b.passed - a.passed;
+        return lastGuy > nextGuy ? -1 : 1;
+      });
+      console.log(sortedOldest);
+
+      // console.log(
+      //   inventors.sort((a, b) => a.passed - a.year - (b.passed = b.year))
+      // );
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+      // doing this in the console for the about page so the following code will break the file 
+      //            *** (which is pretty dumb) *** 
+
+      // const category = document.querySelector('.mw-category');
+      // const streetLinks = Array.from(category.querySelectorAll('a'));
+      // could also use const citiLinks = [...category.querySelectorAll('a')];
+      // see ES6 spread syntax https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax 
+
+      // const filteredStreets = streetLinks
+      //                                .map(link => link.textContent)
+      //                                .filter(streetName => streetName.includes('de'));
+
+
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
+
+      const sortedAlpha = people.sort((lastOne, nextOne) => {
+        const [aLast, aFirst] = lastOne.split(', ');
+        const [bLast, bFirst] = nextOne.split(', ');
+
+        return aLast > bLast ? 1 : -1;  // asc
+        // return aLast > bLast ? -1 : 1;  // desc
+      });
+
+      console.table(sortedAlpha);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -156,6 +186,20 @@
         'car',
         'truck',
       ];
+
+      const transportation = data.reduce(function(obj, item) {
+
+        if(!obj[item]) {
+          obj[item] = 0;
+        }
+
+        obj[item] ++;
+
+        return obj;
+
+      }, {});
+
+      console.log(transportation);
     </script>
   </body>
 </html>
