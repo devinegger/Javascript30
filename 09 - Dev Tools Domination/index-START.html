@@ -1,47 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-  <link rel="icon" href="https://fav.farm/🔥" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Console Tricks!</title>
+    <link rel="icon" href="https://fav.farm/🔥" />
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+    <script>
+      const dogs = [
+        { name: 'Snickers', age: 2 },
+        { name: 'hugo', age: 8 },
+      ];
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+      // in dev tools, right click on the paragraph then break on attribute modification
+      function makeGreen() {
+        const p = document.querySelector('p');
+        p.style.color = '#BADA55';
+        p.style.fontSize = '50px';
+      }
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+      // Regular
 
-    // Regular
+      console.log('help me!');
 
-    // Interpolated
+      // Interpolated
 
-    // Styled
+      console.log('get me out of this %s place', '😈');
 
-    // warning!
+      // Styled
 
-    // Error :|
+      console.log('%c WHOA!', 'font-size: 30px; color: blue;');
 
-    // Info
+      // warning!
 
-    // Testing
+      console.warn('WAIT...!');
 
-    // clearing
+      // Error :|
 
-    // Viewing DOM Elements
+      console.error('EFFFF!!!');
 
-    // Grouping together
+      // Info
 
-    // counting
+      console.info('wut dos dis do?');
 
-    // timing
+      // Testing
 
-  </script>
-</body>
+      const para = document.querySelector('p');
+      console.assert(para.classList.contains('wtf'), 'dude, no.');
+      //console.assert(1 === 2, 'this is wrong!'); // only prints if first statement is false
+
+      // clearing
+
+      // console.clear(); dont do it dont do it dont do it
+
+      // Viewing DOM Elements
+
+      console.log(para);
+      console.dir(para);
+
+      // Grouping together
+
+      dogs.forEach((dog) => {
+        //console.groupCollapsed(`${dog.name}`);
+        console.group(`${dog.name}`);
+        console.log(`this is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+        console.groupEnd(`${dog.name}`);
+      });
+
+      // counting
+      console.count('Devin');
+      console.count('Devin');
+      console.count('Karen');
+      console.count('Devin');
+      console.count('Azumi');
+      console.count('Karen');
+      console.count('Karen');
+      console.count('Biscuit');
+      console.count('Azumi');
+
+      // timing
+      console.time('fetching...');
+      fetch('https://api.github.com/users/devinegger')
+        .then((data) => data.json())
+        .then((data) => {
+          console.timeEnd('fetching...');
+          console.log(data);
+        });
+
+      // finally...
+
+      console.table(dogs);
+    </script>
+  </body>
 </html>
