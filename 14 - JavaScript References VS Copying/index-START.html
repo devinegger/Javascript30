@@ -10,14 +10,36 @@
   <script>
     // start with strings, numbers and booleans
 
+    let age = 100;
+    let age2 = age;
+
+    console.log(age, age2);
+
+    age = 200
+
+    // etc.. etc...
+
+
+
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
 
+    const team = players;
+
+    console.log(team, players);
+
     // You might think we can just do something like this:
 
+    team[3] = "dev";
+
+    console.log(team);
+    console.log(players);
+
     // however what happens when we update that array?
+
+
 
     // now here is the problem!
 
@@ -25,13 +47,29 @@
 
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
+
+
     // So, how do we fix this? We take a copy instead!
 
     // one way
 
+    const team2 = players.slice();
+    console.log(team2);
+
     // or create a new array and concat the old one in
 
+    const team4 = [].concat(players);
+    console.log(team4);
+    
     // or use the new ES6 Spread
+    
+    const team3 = [...players];
+    console.log(team3);
+
+    // or....
+
+    const team5 = Array.from(players);
+    console.log(team5);
 
     // now when we update it, the original one isn't changed
 
@@ -45,11 +83,44 @@
 
     // and think we make a copy:
 
+    const captain = person;
+
+    captain.age = 99;
+
+    console.log(person);
+
     // how do we take a copy instead?
+
+    const captain2 = Object.assign({}, person, {age: 60});
+
+    console.log(captain2);
 
     // We will hopefully soon see the object ...spread
 
+    // const captainSpread = {...captain2};
+
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    const devin = {
+      name : "Devin",
+      age : 99,
+      social: {
+        twitter: "@devinegger",
+        facebook: "devinegger"
+      }
+    }
+
+    console.log(devin);
+
+    const dev = Object.assign({}, devin);
+
+    console.log(dev);
+
+    dev.name = "Devi";
+
+    dev.social = "@devi";
+
+    console.log(devin.social);
 
   </script>
 
