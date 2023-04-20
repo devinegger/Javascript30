@@ -11,7 +11,7 @@
 
     <h1>Slide in on Scroll</h1>
 
-    <p>Consectetur adipisicing elit. Tempore tempora rerum, est autem cupiditate, corporis a qui libero ipsum delectus quidem dolor at nulla, adipisci veniam in reiciendis aut asperiores omnis blanditiis quod quas laborum nam! Fuga ad tempora in aspernatur pariaturlores sunt esse magni, ut, dignissimos.</p>
+    <span>Consectetur adipisicing elit. Tempore tempora rerum, est autem cupiditate, corporis a qui libero ipsum delectus quidem dolor at nulla, adipisci veniam in reiciendis aut </span>
     <p>Lorem ipsum cupiditate, corporis a qui libero ipsum delectus quidem dolor at nulla, adipisci veniam in reiciendis aut asperiores omnis blanditiis quod quas laborum nam! Fuga ad tempora in aspernatur pariatur fugit quibusdam dolores sunt esse magni, ut, dignissimos.</p>
     <p>Adipisicing elit. Tempore tempora rerum..</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore tempora rerum, est autem cupiditate, corporis a qui libero ipsum delectus quidem dolor at nulla, adipisci veniam in reiciendis aut asperiores omnis blanditiis quod quas laborum nam! Fuga ad tempora in aspernatur pariatur fugit quibusdam dolores sunt esse magni, ut, dignissimos.</p>
@@ -58,6 +58,36 @@
         if (callNow) func.apply(context, args);
       };
     }
+
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkSlide(e) {
+      sliderImages.forEach(image => {
+        // halfway through the image
+        const slideInAt = (window.scrollY + window.innerHeight) - image.height/2;
+        // bottom of the image
+        const imageBottom = image.offsetTop + image.height;
+
+        console.log(slideInAt);
+        console.log(image.offsetTop);
+
+        const isHalfShown = slideInAt > image.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+
+        // console.log(isHalfShown);
+        // console.log(isNotScrolledPast);
+
+        if(isHalfShown && isNotScrolledPast) {
+          image.classList.add('active');
+        } else {
+          image.classList.remove('active');
+        }
+
+
+      })
+    }
+
+    window.addEventListener('scroll', debounce(checkSlide));
 
   </script>
 
