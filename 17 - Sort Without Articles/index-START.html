@@ -47,8 +47,38 @@
   <ul id="bands"></ul>
 
 <script>
+const articles = ['The', 'A', 'An'];
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const bandsSorted = bands.sort(compareBands);
+const bandList = document.querySelector('#bands');
 
+// my method is a bit more reacty here... which I'm fine with.
+// Wes uses bandList.innerHTML = then bands.sorted.map()
+bandsSorted.map(band => {
+  let bandItem = document.createElement('li');
+  bandItem.append(band);
+  bandList.appendChild(bandItem);
+});
+
+function stripArticle(bandName) {
+  // could refactor this with a regex:
+  // return bandName.replace(/^(a /the /an )/i, '').trim()
+  if(articles.includes(bandName.split(" ")[0])) {
+    return bandName.split(" ").splice(1).join(" ");
+  } else {
+    return bandName;
+  }
+}
+
+function compareBands(bandA, bandB) {
+  // can refactor with ternary and explicit return in the sort method
+  // return stripArticle(bandA) < stripArticle(bandB) ? -1 : 1;
+  if( stripArticle(bandA) < stripArticle(bandB) ) {
+    return -1;
+  } else {
+    return 1;
+  } 
+}
 
 </script>
 
