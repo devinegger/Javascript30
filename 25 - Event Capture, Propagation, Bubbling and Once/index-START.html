@@ -41,8 +41,24 @@
   }
 </style>
 
-<button></button>
+<button class="hoohaw">clickith only one time</button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+
+  function logText(e) {
+    // e.stopPropagation(); // no moar bubbles!
+    console.log(this.classList.value);
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false, // set to true to get the outer most div
+    once: true
+  }));
+
+  button.addEventListener('click', logText, {
+    once: true
+  })
 
 </script>
 </body>
